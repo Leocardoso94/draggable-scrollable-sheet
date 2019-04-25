@@ -429,9 +429,10 @@ class _DraggableScrollableSheetScrollPosition
 
   @override
   void goBallistic(double velocity) {
-    if (velocity == 0.0 ||
-        (velocity < 0.0 && listShouldScroll) ||
-        (velocity > 0.0 && extent.isAtMax)) {
+    if (extent.currentExtent <= extent.initialExtent &&
+        (velocity == -0.0 ||
+            (velocity < 0.0 && listShouldScroll) ||
+            (velocity > 0.0 && extent.isAtMax))) {
       super.goBallistic(velocity);
       return;
     }

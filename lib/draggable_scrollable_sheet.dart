@@ -457,7 +457,7 @@ class _DraggableScrollableSheetScrollPosition
     void _tick() {
       final double delta = ballisticController.value - lastDelta;
       lastDelta = ballisticController.value;
-      extent.addPixelDelta(delta, context.notificationContext);
+      extent.addPixelDelta(1000, context.notificationContext);
       if ((velocity > 0 && extent.isAtMax) ||
           (velocity < 0 && extent.isAtMin)) {
         // Make sure we pass along enough velocity to keep scrolling - otherwise

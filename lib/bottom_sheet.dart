@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:draggable_scrollable_sheet/draggable_scrollable_sheet.dart';
+import 'package:draggable_scrollable_sheet/draggable_scrollable_sheet.dart' as b;
 import 'package:draggable_scrollable_sheet/scaffold.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart'
@@ -158,7 +158,7 @@ class _BottomSheetState extends State<BottomSheet> {
     }
   }
 
-  bool extentChanged(DraggableScrollableNotification notification) {
+  bool extentChanged(b.DraggableScrollableNotification notification) {
     if (notification.extent == notification.minExtent) {
       widget.onClosing();
     }
@@ -171,7 +171,7 @@ class _BottomSheetState extends State<BottomSheet> {
       key: _childKey,
       color: widget.color,
       elevation: widget.elevation,
-      child: NotificationListener<DraggableScrollableNotification>(
+      child: NotificationListener<b.DraggableScrollableNotification>(
         onNotification: extentChanged,
         child: widget.builder(context),
       ),

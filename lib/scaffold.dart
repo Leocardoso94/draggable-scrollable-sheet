@@ -7,7 +7,7 @@ import 'dart:collection';
 import 'dart:math' as math;
 
 import 'package:draggable_scrollable_sheet/bottom_sheet.dart';
-import 'package:draggable_scrollable_sheet/draggable_scrollable_sheet.dart';
+import 'package:draggable_scrollable_sheet/draggable_scrollable_sheet.dart' as d;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart'
     hide BottomSheet, Scaffold, showModalBottomSheet, showBottomSheet;
@@ -1429,12 +1429,12 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin {
           BottomSheet.createAnimationController(this)..value = 1.0;
       LocalHistoryEntry _persistentSheetHistoryEntry;
       bool _persistentBottomSheetExtentChanged(
-          DraggableScrollableNotification notification) {
+          d.DraggableScrollableNotification notification) {
         if (notification.extent > notification.initialExtent) {
           if (_persistentSheetHistoryEntry == null) {
             _persistentSheetHistoryEntry = LocalHistoryEntry(onRemove: () {
               if (notification.extent > notification.initialExtent) {
-                DraggableScrollableActuator.reset(notification.context);
+                d.DraggableScrollableActuator.reset(notification.context);
               }
               showBodyScrim(false, 0.0);
               _floatingActionButtonVisibilityValue = 1.0;
@@ -1452,9 +1452,9 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin {
 
       _currentBottomSheet = _buildBottomSheet<void>(
         (BuildContext context) {
-          return NotificationListener<DraggableScrollableNotification>(
+          return NotificationListener<d.DraggableScrollableNotification>(
             onNotification: _persistentBottomSheetExtentChanged,
-            child: DraggableScrollableActuator(
+            child: d.DraggableScrollableActuator(
               child: widget.bottomSheet,
             ),
           );
@@ -2226,7 +2226,7 @@ class _StandardBottomSheetState extends State<_StandardBottomSheet> {
     }
   }
 
-  bool extentChanged(DraggableScrollableNotification notification) {
+  bool extentChanged(d.DraggableScrollableNotification notification) {
     final double extentRemaining = 1.0 - notification.extent;
     final ScaffoldState scaffold = Scaffold.of(context);
     if (extentRemaining < _kBottomSheetDominatesPercentage) {
@@ -2255,7 +2255,7 @@ class _StandardBottomSheetState extends State<_StandardBottomSheet> {
     return Semantics(
         container: true,
         onDismiss: close,
-        child: NotificationListener<DraggableScrollableNotification>(
+        child: NotificationListener<d.DraggableScrollableNotification>(
           onNotification: extentChanged,
           child: bottomSheet,
         ));
